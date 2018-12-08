@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://v3.bootcss.com/examples/dashboard/ -->
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://v3.bootcss.com/favicon.ico">
+    <title>班级</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/static/mystyle.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://v3.bootcss.com/examples/dashboard/#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Hi&nbsp;&nbsp;{{ class_message.username }}</a></li>
+                <li><a href="/logout/">注销</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar high-top">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="">选课系统<span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/class/course/{{ class_message.pk }}/">成绩信息</a></li>
+                <li class="active"><a href="/class/{{ class_message.pk }}/">班级信息</a></li>
+            </ul>
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">个人信息</h1>
+
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading">个人列表 <i class="fa fa-thumb-tack pull-right"></i></div>
+                <div class="panel-body">
+                    <div class="row" style="margin-bottom: 15px">
+                        <form action="" method="get">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="select" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">搜索</button>
+                                </span>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-md-4 -->
+                        </form>
+                        <div class="col-md-1 pull-right">
+                            <a href="#" type="button" class="btn btn-success" data-toggle="modal"
+                               data-target="#myModal">新增</a>
+                        </div>
+                    </div><!-- /.row -->
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>班级</th>
+                            <th>用户名</th>
+                            <th>英语</th>
+                            <td>语文</td>
+                            <td>数学</td>
+                            <td>物理</td>
+                            <td>班主任</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ class_message.classes.cname }}</td>
+                            <td>{{ class_message.username }}</td>
+                            <td>{{ class_message.course.english }}</td>
+                            <td>{{ class_message.course.chinese }}</td>
+                            <td>{{ class_message.course.math }}</td>
+                            <td>{{ class_message.course.phycics }}</td>
+                            <td>{{ class_message.teacher.tname }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">添加信息</h4>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/jquery-3.3.1.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/mystyle.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4" style="margin-top:100px ">
+            <h1 class="col-md-6 col-md-offset-1 text-center">请登录</h1>
+            <form action="/login/" class="form-group  " method="post">
+                {% csrf_token %}
+            <div class="form-group">
+                <div class="input-group col-md-8">
+                    用户名：<input type="text" class="form-control" id="username" name="username">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group col-md-8">
+                    密码：<input type="password" class="form-control" id="password" name="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group col-sm-offset-0 col-md-10">
+                    <input type="button" class="btn btn-info" id="login-button"value="登录">
+                    <a class="col-sm-offset-6 col-md-pull-2"href="/reg/">注册</a>
+                    <p><span class="login-error"></span></p>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/static/jquery-3.3.1.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $("#login-button").click(function () {
+        // 1. 取到用户填写的用户名和密码 -> 取input框的值
+        var username = $("#username").val();
+        var password = $("#password").val();
+        // 2. 用AJAX发送到服务端
+        $.ajax({
+            url: "/login/",
+            type: "post",
+            data: {
+                "username": username,
+                "password": password,
+                "csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.status) {
+                    // 有错误，在页面上提示
+                    $(".login-error").text(data.msg);
+                }else{
+                    // 登陆成功
+                    location.href = data.msg;
+                 }
+            }
+        })
+    });
+
+    // 当input框获取焦点时将之前的错误清空
+    $("#username,#password").focus(function () {
+        // 将之前的错误清空
+        $(".login-error").text("");
+    });
+</script>
+</body>
+</html>
