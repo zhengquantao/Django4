@@ -1,2 +1,5 @@
 # Django4
-student course teacher
+
+student-course-teacher System
+    
+    
